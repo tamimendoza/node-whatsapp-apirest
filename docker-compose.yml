@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  apirest:
+    container_name: apirest
+    restart: always
+    build: .
+    ports:
+      - 3000:3000
+    links:
+      - mongoddwsp
+    volumes:
+      - .:/usr/src/app
+    networks:
+      - youtube-red
+  mongoddwsp:
+    container_name: mongoddwsp
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    networks:
+      - youtube-red
+
+networks:
+  youtube-red:
+    driver: bridge
